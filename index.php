@@ -8,17 +8,17 @@ use GeoIp2\Database\Reader;
 $reader = new Reader(dirname(__FILE__).'/GeoLite2-City.mmdb');
 
 $ip = null;
+if (!$ip && isset($argv[1])) {
+  $ip = $argv[1];
+}
+if (!$ip && isset($_REQUEST['ip'])) {
+  $ip = $_REQUEST['ip'];
+}
 if (!$ip && isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
   $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 }
 if (!$ip && isset($_SERVER['REMOTE_ADDR'])) {
   $ip = $_SERVER['REMOTE_ADDR'];
-}
-if (!$ip && isset($_REQUEST['ip'])) {
-  $ip = $_REQUEST['ip'];
-}
-if (!$ip && isset($argv[1])) {
-  $ip = $argv[1];
 }
 
 // Replace "city" with the appropriate method for your database, e.g.,
