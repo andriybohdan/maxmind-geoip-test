@@ -24,11 +24,11 @@ if (!$ip && isset($argv[1])) {
 // Replace "city" with the appropriate method for your database, e.g.,
 // "country".
 
+print("<pre>");
 try {
   $record = $ip ? $reader->city($ip) : null;
   // $record = $reader->city('46.149.80.233');
   if ($record) {
-
 
     print("IP: " .$ip . "\n"); // 'US'
     print("Country code: " .$record->country->isoCode . "\n"); // 'US'
@@ -53,3 +53,4 @@ try {
 } catch (Exception $ex) {
   print("Failure: ".$ex->getMessage()); 
 }
+print("</pre>");
